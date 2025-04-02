@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Results</title>
+    <style>
+        body { font-family: sans-serif; margin: 20px; }
+        .container { max-width: 900px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .valid { color: green; }
+        .invalid { color: red; font-weight: bold; }
+        .field-name { text-transform: capitalize; }
+        .original-text { background-color: #f9f9f9; border: 1px dashed #ccc; padding: 10px; margin-top: 15px; max-height: 200px; overflow-y: auto; font-family: monospace; white-space: pre-wrap; word-wrap: break-word;}
+        a { display: inline-block; margin-top: 20px; text-decoration: none; padding: 8px 15px; background-color: #6c757d; color: white; border-radius: 3px; }
+        a:hover { background-color: #5a6268; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Validation Results</h1>
+
+        <h2>Extracted & Validated Data</h2>
+        {% if validation %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Extracted Value</th>
+                        <th>Validation Status</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for field, result in validation.items() %}
+                    <tr>
+                        <td class="field-name">{{ field.replace('_', ' ') }}</td>
+                        <td>{{ result.value if result.value is not none else '--- Not Found ---' }}</td>
+                        <td class="{{ 'valid' if result.valid else 'invalid' }}">
+                            {{ 'Valid' if result.valid else 'Invalid' }}
+                        </td>
+                        <td>{{ result.message }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No validation results were generated.</p>
+        {% endif %}
+
+        <h2>Original Text Snippet</h2>
+        <div class="original-text">
+           {{ original_text | safe }}
+        </div>
+
+        <a href="{{ url_for('index') }}">Validate Another Term Sheet</a>
+
+    </div>
+</body>
+</html>
