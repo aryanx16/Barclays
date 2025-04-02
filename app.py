@@ -12,7 +12,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['SECRET_KEY'] = 'your_super_secret_key' # Change this for production!
 # Optional: Create the uploads folder if it doesn't exist
 if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+    # os.makedirs(UPLOAD_FOLDER)
 
 # --- Helper Functions ---
 
