@@ -1,1 +1,8 @@
-venv
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+uploads/  # Usually don't commit user uploads
+*.env     # Don't commit environment variable files
